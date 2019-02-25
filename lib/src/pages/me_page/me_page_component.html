@@ -1,0 +1,78 @@
+<header class="header header-classes">
+  <p class="title">Me</p>
+  <nav>
+    <p *ngFor="let tab of tabs; let i = index" [attr.selected]="selectedTab == i" (click)="setTab(i)"><span>{{tab}}</span><material-ripple></material-ripple></p>
+    <span class="header-tabindicator" #tabIndicator [ngStyle]="tabIndicatorStyles"></span>
+  </nav>
+</header>
+<div (touchstart)="touchStart($event)" (touchmove)="touchMove($event)" (touchend)="touchEnd($event)" class="page-tabcontainer" #tabContainer [ngStyle]="tabContainerStyles" *ngIf="!loading">
+  <main [attr.selected]="selectedTab == 0" class="page-tab page-tab--myaccount">
+    <material-card>
+      <div class="mdc-card__primary">
+        <h3 class="material-card__subtitle">Account</h3>
+        <h2 class="material-card__title">{{email}}</h2>
+      </div>
+      <div class="material-card__secondary">
+        <material-button raised class="button-primary" (trigger)="signOutButton()">Sign Out</material-button>
+      </div>
+    </material-card>
+    <material-card>
+      <div class="mdc-card__primary">
+        <h3 class="material-card__subtitle">Verified Email</h3>
+        <h2 class="material-card__title">{{verifiedEmail}}</h2>
+      </div>
+    </material-card>
+    <material-card>
+      <div class="mdc-card__primary">
+        <h3 class="material-card__subtitle">Your Classes</h3>
+      </div>
+      <div class="mdc-card__secondary">
+        <ul>
+          <li *ngFor="let class of myClass; let i = index">{{class}}</li>
+        </ul>
+        <material-button raised class="button-primary" (trigger)="changeClasses()">Change</material-button>
+      </div>
+    </material-card>
+    <material-card>
+      <p>Charlotte's Family are looking for people to adopt kittens. Interested? Contact Charlotte!</p>
+    </material-card>
+  </main>
+  <main [attr.selected]="selectedTab == 1" class="page-tab page-tab--options">
+    <table class="optionsTable">
+      <tr>
+        <td>Use Images</td>
+        <td><material-toggle (checkedChange)="setOption('useImages', $event)" [(ngModel)]="options['useImages']"></material-toggle></td>
+      </tr>
+    </table>
+  </main>
+</div>
+<div *ngIf="loading" class="centre-child">
+  <material-spinner></material-spinner>
+</div>
+<material-fab raised class="button-primary fixed" (trigger)="dialogOpen = true">
+    <material-icon icon="info"></material-icon>
+</material-fab>
+
+
+<modal [visible]="dialogOpen">
+  <material-dialog>
+    <h1 header>Mini '22</h1>
+    <h2>Current Version: <b>v9</b></h2>
+    <h2>Current Release: <b>v9.2</b></h2>
+    <p>Release 9.2 is the November 2018 release, and the third version 9 release.</p>
+    <h2>Current Patch: <b>v9.2.3</b></h2>
+    <p>Patch 9.2.3 is the second 9.2 patch, and the seventh version 9 patch.</p>
+    <h2>Naming System</h2>
+    <p><i>Version</i>.<i>Release</i>.<i>Patch</i><br>
+      Version aligns with the current grade, and represents a major, breaking redesign or update,
+      and usually comes with significant design updates.<br>
+      Releases are monthly updates containing both new features and bugfixes, and slight design changes.
+      Any homework posted in any release of a version should alwaus be compatible with any other release
+      of that version.<br>
+      Patches are the bugfix updates, coming out whenever neccesary, usually soon after a release update
+      or version update. Patches will almost never include design changes or new features, unless the old
+      design was caused by a bug or feature needed to fix bug. 
+    </p>
+    <material-button raised class="button-primary" (trigger)="dialogOpen = false">Okay</material-button>
+  </material-dialog>
+</modal>

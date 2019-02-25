@@ -1,0 +1,31 @@
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_button/mixins';
+@import 'package:angular_components/material_radio/mixins';
+
+.red-radio {
+    @include material-radio-color($mat-red-600, $mat-red-500);
+}
+
+material-spinner {
+  border-color: $mat-red;
+}
+
+.centre-child {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.user-icon {
+  position:fixed;
+  width:2rem;
+  height:2rem;
+  top:1rem;
+  left:1rem;
+  border-radius:50%;
+  z-index:5;
+}
+
+@include button-background-color('.button-primary', $mat-red);
+@include button-color('.button-primary', #fff);

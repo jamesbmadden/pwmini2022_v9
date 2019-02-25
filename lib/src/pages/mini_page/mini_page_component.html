@@ -1,0 +1,25 @@
+<header class="header header-classes">
+  <p class="title">Mini</p>
+  <!-- <nav>
+    <p *ngFor="let tab of tabs; let i = index" [attr.selected]="selectedTab == i" (click)="setTab(i)"><span>{{tab}}</span><material-ripple></material-ripple></p>
+    <span class="header-tabindicator" #tabIndicator [ngStyle]="tabIndicatorStyles"></span>
+  </nav> -->
+</header>
+<div class="page-tabcontainer" #tabContainer [ngStyle]="tabContainerStyles" (touchStart)="touchStart()" (touchMove)="touchMove()" (touchEnd)="touchEnd()" *ngIf="!loading">
+  <main [attr.selected]="selectedTab == 0" class="page-tab page-tab--mini">
+    <div *ngFor="let event of miniEvents; let i = index">
+      <material-card>
+        <div class="mdc-card__primary"></div>
+        <div class="material-card__secondary">
+          <p>{{event['title']}} on {{getDate(event['date'])}}</p>
+        </div>
+      </material-card>
+    </div>
+  </main>
+</div>
+<div *ngIf="loading" class="centre-child">
+  <material-spinner></material-spinner>
+</div>
+<material-fab disabled raised class="button-primary fixed">
+    <material-icon icon="add"></material-icon>
+</material-fab>

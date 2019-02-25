@@ -1,0 +1,21 @@
+<div *ngIf="!loggedIn">
+  <login-prompt></login-prompt>
+</div>
+
+<div *ngIf="url == '/select_class'">
+  <class-list></class-list>
+</div>
+
+<!-- <img [src]="icon" class="user-icon"> -->
+
+<div *ngIf="url == '/' && loggedIn">
+  <classes-page></classes-page>
+</div>
+<div *ngIf="url == '/me' && loggedIn">
+  <me-page></me-page>
+</div>
+<div *ngIf="url == '/mini' && loggedIn">
+  <mini-page short-header></mini-page>
+</div>
+
+<bottom-app-bar *ngIf="loggedIn"></bottom-app-bar>

@@ -1,0 +1,39 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/user/*/homework",
+        "function": "homeworkForEmail"
+      },
+      {
+        "source": "/api/user/*/events",
+        "function": "eventsForEmail"
+      }, 
+      {
+        "source": "/api/user/*/classes",
+        "function": "classesForEmail"
+      },
+      {
+        "source": "/api/user/*",
+        "function": "getUser"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

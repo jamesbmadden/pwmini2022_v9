@@ -1,0 +1,38 @@
+<div class="classes--prompt">
+  <h1>Pick Your Classes</h1>
+  <!-- <div *ngFor="let block of blocks; let b = index">
+    <h3>{{block}}</h3>
+    <material-radio-group [(ngModel)]="selectedClass[block]">
+      <material-radio class="red-radio" *ngFor="let class of classLists[block]; let i = index" [value]="class">{{class}}</material-radio>
+      <material-button raised (trigger)="createClassDialog(block)">Other Class</material-button>
+    </material-radio-group>
+  </div><br> -->
+  <material-expansionpanel-set>
+    <p class="error">{{errorMessage}}</p>
+    <material-expansionpanel *ngFor="let block of blocks; let b = index" [name]="block" wide [showSaveCancel]="false">
+      <span value>{{selectedClass[block]}}</span>
+      <h3>Pick Your Class</h3>
+      <material-radio-group [(ngModel)]="selectedClass[block]">
+        <material-radio class="red-radio" *ngFor="let class of classLists[block]; let i = index" [value]="class">{{class}}</material-radio><br>
+      </material-radio-group>
+      <material-button raised (trigger)="createClassDialog(block)">Other Class</material-button>
+    </material-expansionpanel>
+  </material-expansionpanel-set><br>
+  <material-button raised class="button-primary" (trigger)="classesDone()">Begin</material-button>
+</div>
+
+<modal [visible]="dialogOpen">
+  <material-dialog>
+    <h1 header>Add Class for Block {{dialogBlock}}</h1>
+    <div *ngIf="!dialogLoading">
+      <material-input required label="Class Name" floatingLabel [(ngModel)]="newClassName"></material-input>
+    </div>
+    <div footer *ngIf="!dialogLoading">
+      <material-button raised class="button-primary" (trigger)="createClass()">Create</material-button>
+      <material-button raised (trigger)="dialogOpen=false">Cancel</material-button>
+    </div>
+    <div *ngIf="dialogLoading" class="centre-child">
+      <material-spinner></material-spinner>
+    </div>
+  </material-dialog>
+</modal>

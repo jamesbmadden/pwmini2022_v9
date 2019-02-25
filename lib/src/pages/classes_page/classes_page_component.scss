@@ -1,0 +1,116 @@
+@import 'package:angular_components/css/material/material';
+
+* {
+  box-sizing:border-box;
+}
+
+header {
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100vw;
+  height:8rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  color:#222;
+  overflow:hidden;
+  z-index:4;
+  background-color:white;
+  overflow:visible;
+  h1 {
+    text-align:center;
+    font-size:24pt;
+    font-weight: 300;
+    height:4rem;
+    margin:0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  nav {
+    position:relative;
+    width:100%;
+    height:4rem;
+    display:flex;
+    flex-direction:row;
+    p {
+      cursor:pointer;
+      position:relative;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0px;
+      span {
+        transition:color 0.4s cubic-bezier(1,0,0,1), transform 0.4s cubic-bezier(1,0,0,1);
+        transform:scale(0.8);
+      }
+    }
+    p[selected=true] {
+      span {
+        transform:scale(1);
+        color:$mat-red;
+      }
+    }
+  }
+}
+
+.header-tabindicator {
+  position:absolute;
+  left:0px;
+  top:62px;
+  height:4px;
+  border-radius:2px;
+  background-color:$mat-red;
+  z-index:1;
+  transition:transform 0.4s cubic-bezier(1,0,0,1);
+}
+
+.page-tabcontainer {
+  display:flex;
+  flex-direction:row;
+  transition:transform 0.4s cubic-bezier(1,0,0,1);
+  main {
+    width:100%;
+  }
+}
+
+material-fab {
+  position: fixed;
+  bottom:1.5rem;
+  right: 1rem;
+  margin:0px;
+  z-index:2;
+}
+
+@media(min-width: 1024px) {
+  material-fab {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+material-spinner {
+  border-color: $mat-red;
+}
+
+:host {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-top:128px;
+  box-sizing:border-box;
+}
+
+.centre-child {
+  position:relative;
+  min-height:64px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}

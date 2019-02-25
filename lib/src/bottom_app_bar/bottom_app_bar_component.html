@@ -1,0 +1,18 @@
+<div class="other-tabs">
+  <p [attr.selected]="url =='/mini'" (click)="setUrl('/mini')">
+    <material-icon icon="school"></material-icon>
+    <span>Mini</span>
+    <material-ripple></material-ripple>
+  </p>
+  <p [attr.selected]="url =='/'" (click)="setUrl('/')">
+    <material-icon icon="class"></material-icon>
+    <span>My Classes</span>
+    <material-ripple></material-ripple>
+  </p>
+  <p [attr.selected]="url == '/me'" (click)="setUrl('/me')">
+    <material-icon icon="person"></material-icon>
+    <span>Me</span>
+    <material-ripple></material-ripple>
+  </p>
+</div>
+<p class="fab-offset"></p>

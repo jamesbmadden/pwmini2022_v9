@@ -1,0 +1,25 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+@import url(https://fonts.googleapis.com/css?family=Material+Icons);
+
+body {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 5vw;
+}
+
+material-button {
+  border-radius:512px !important;
+}
+
+* {
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+*:not(input) {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}

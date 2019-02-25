@@ -1,0 +1,32 @@
+<div *ngIf="page=='login'" class="login-page login-page--login">
+  <h1>Sign<span *ngIf="loading">ing</span> In<span *ngIf="loading">...</span></h1>
+  <div *ngIf="!loading">
+    <span class="login--error" *ngIf="errorMessage.isNotEmpty">{{errorMessage}}</span>
+    <material-input required type="email" autocomplete="email" label="Email" floatingLabel [(ngModel)]="loginEmail"></material-input>
+    <material-input required type="password" autocomplete="password" label="Password" floatingLabel [(ngModel)]="loginPassword"></material-input>
+    <div class="login-flexcontainer">
+      <material-button raised [disabled]="loginEmail.isEmpty || loginPassword.isEmpty || loggedIn" (trigger)="loginButton()" class="button-primary">Sign In</material-button>
+      <material-button raised (trigger)="page='signup'">Sign Up</material-button>
+    </div><br>
+    <material-button [style.display]="gButton" type="submit" raised (trigger)="loginGoogle()"><img class="icon" src="/src/icon/google.svg">Sign In</material-button>
+  </div>
+  <material-spinner *ngIf="loading"></material-spinner>
+</div>
+
+<div *ngIf="page=='signup'" class="login-page login-page--signup">
+  <h1>Sign<span *ngIf="loading">ing</span> Up<span *ngIf="loading">...</span></h1>
+  <div *ngIf="!loading">
+    <span class="login--error" *ngIf="errorMessage.isNotEmpty">{{errorMessage}}</span>
+    <material-input required type="email" label="Email" floatingLabel [(ngModel)]="signupEmail"></material-input>
+    <div class="login-flexcontainer">
+      <material-input required type="password" autocomplete="new-password" label="Password" floatingLabel [(ngModel)]="signupPassword"></material-input>
+      <material-input required type="password" autocomplete="new-password" label="Retype Password" floatingLabel [(ngModel)]="signupRePassword"></material-input>
+    </div>
+    <div class="login-flexcontainer">
+      <material-button raised [disabled]="signupEmail.isEmpty || signupPassword.isEmpty || signupRePassword.isEmpty || loggedIn" (trigger)="signupButton()" class="button-primary">Sign Up</material-button>
+      <material-button raised (trigger)="page='login'">Sign In</material-button>
+    </div><br>
+    <material-button [style.display]="gButton" type="submit" raised (trigger)="loginGoogle()"><img class="icon" src="/src/icon/google.svg">Sign Up</material-button>
+  </div>
+  <material-spinner *ngIf="loading"></material-spinner>
+</div>

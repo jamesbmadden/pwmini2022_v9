@@ -1,0 +1,72 @@
+<header class="header header-classes">
+  <p class="title">Classes</p>
+  <nav>
+    <p *ngFor="let tab of tabs; let i = index" [attr.selected]="selectedTab == i" (click)="setTab(i)"><span>{{tab}}</span><material-ripple></material-ripple></p>
+    <span class="header-tabindicator" #tabIndicator [ngStyle]="tabIndicatorStyles"></span>
+  </nav>
+</header>
+<div (touchstart)="touchStart($event)" (touchmove)="touchMove($event)" (touchend)="touchEnd($event)" class="page-tabcontainer" #tabContainer [ngStyle]="tabContainerStyles" (touchStart)="touchStart()" (touchMove)="touchMove()" (touchEnd)="touchEnd()" *ngIf="!loading">
+  <main [attr.selected]="selectedTab == 0" class="page-tab page-tab--homework">
+    <material-card *ngFor="let class of yourClassesList; let i = index">
+      <div *ngIf="class['homework'].isNotEmpty" class="mdc-card__primary">
+        <h2 class="material-card__title">{{myClassesMap[blockNames[i]]}}</h2>
+      </div>
+      <div *ngIf="class['homework'].isNotEmpty" class="material-card__secondary">
+        <div *ngFor="let work of class['homework']; let j = index"> 
+          <img *ngIf="work['image'] != null" [attr.src]="getImage(myClassesMap[blockNames[i]], work['title'])">
+          <p>
+            <material-checkbox #done (click)="setDone(work['title'])" [checked]="completedWork.contains(work['title'])" materialTooltip="Mark work as finished"></material-checkbox>
+            <span [class.done]="done.checked">{{work["title"]}} for {{getDate(work["date"])}}</span>
+          </p>
+        </div>
+      </div>
+    </material-card>
+  </main>
+  <main [attr.selected]="selectedTab == 1" class="page-tab page-tab--events">
+    <material-card *ngFor="let class of yourClassesList; let i = index">
+      <div class="mdc-card__primary" *ngIf="class['events'].isNotEmpty">
+        <h2 class="material-card__title">{{myClassesMap[blockNames[i]]}}</h2>
+      </div>
+      <div class="material-card__secondary" *ngIf="class['events'].isNotEmpty">
+        <p *ngFor="let work of class['events']; let j = index">{{work["title"]}} on {{getDate(work["date"])}}</p>
+      </div>
+    </material-card>
+  </main>
+</div>
+<div *ngIf="loading" class="centre-child">
+  <material-spinner></material-spinner>
+</div>
+<material-fab raised class="button-primary fixed" (trigger)="openDialog()">
+    <material-icon icon="add"></material-icon>
+</material-fab>
+
+<modal [visible]="dialogOpen">
+    <material-dialog>
+      <h1 header>Add <span *ngIf="isHomework == 'homework'">Homework</span><span *ngIf="isHomework == 'events'">Event</span></h1>
+      <p class="error">{{dialogError}}</p>
+      <div *ngIf="!dialogLoading">
+        <p>Homework or Event?</p>
+        <material-radio-group [(ngModel)]="isHomework">
+          <material-radio value="homework">Homework</material-radio>
+          <material-radio value="events">Event</material-radio>
+        </material-radio-group><br>
+        <p>For Class</p>
+        <material-radio-group [(ngModel)]="postClass">
+            <material-radio class="red-radio" *ngFor="let class of myClassesTitleList; let i = index" [value]="class">{{class}}</material-radio>
+        </material-radio-group><br>
+        <material-input [(ngModel)]="newHomeworkTitle" label="Title" floatingLabel></material-input><br>
+        <material-datepicker [minDate]="dateRange.start" [maxDate]="dateRange.end" [(date)]="date"></material-datepicker><br>
+        <div *ngIf="isHomework == 'homework'">
+          <label for="newHomeworkImage">Image (Optional): </label>
+          <input #imageInput (change)="fileChange($event)" type="file" accept="image/*" id="newHomeworkImage" name="newHomeworkImage"><br>
+        </div><br>
+      </div>
+      <div footer *ngIf="!dialogLoading">
+        <material-button (trigger)="postHomework()" raised class="button-primary">Post Homework</material-button>
+        <material-button (trigger)="dialogOpen = false" raised>Cancel</material-button>
+      </div>
+      <div *ngIf="dialogLoading" class="centre-child">
+        <material-spinner></material-spinner>
+      </div>
+    </material-dialog>
+  </modal>
