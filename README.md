@@ -1,6 +1,8 @@
 # PW Mini 2022 (Version 9.2.3)
 App For Managing Homework
 
+**[See the New Version, v10, Here](https://github.com/jamesbmadden/pwmini2022)**
+
 ## Install
 ```
 git clone -b v9 https://github.com/jamesbmadden/pwmini2022
